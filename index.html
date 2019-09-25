@@ -49,9 +49,9 @@
                 console.log("Color is unknown")
             }
 
-            var a=2;
+            var h=2;
 
-            if(a){
+            if(h){
 
             }
             else
@@ -78,10 +78,10 @@
             }
 
             //Loops
-            var a=0;
-            while(a<=10){
-                console.log(a);
-                a++;
+            var j=0;
+            while(j<=10){
+                console.log(j);
+                j++;
             }
 
             var b=0;
@@ -275,12 +275,15 @@
             <li class="bolded">List Item 3</li>
         </ul>
         <a href="http://yahoo.com">Yahoo!!!</a>
-        <button>Say Hello</button>
+        <!-- <button>Say Hello</button> -->
 
         <div>Div 1</div>
         <div class="highlight">Div 2</div>
         <div id="third">Div 3</div>
         <div class="highlight">Div 4</div>
+
+        <span></span>
+        <button>Stop</button>
     </body>
 </html>
 <script>
@@ -334,6 +337,8 @@
 </script>
 
 <script>
+    "use strict";
+
     $("h1").css("color","red");
     $("div").css("background-color","purple")
     $(".highlight").css("width","200px")
@@ -350,10 +355,259 @@
                 alert("Failed to get data")
             }
         })
-
     })
 
     $("h1").on("mouseover",function(){
         $("h1").text("Thank you for coming")
     })
+
+    /*
+
+        Class - model or blueprint
+            constructor
+            properties
+            methods
+
+        Object - instance of Class
+
+        Main charecterstics:
+
+        Inheritance
+        Encapsulation
+        Polymorphism
+        Abstraction
+
+    */
+
+    //constructor function
+    // function Person(name,age){
+    //     this.name=name;
+    //     this.age=age;
+    // }
+
+    // Person.prototype.showMyName=function(){
+    //     console.log(this.name)
+    // }
+
+    class Person {
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+
+        showMyName(){
+            console.log(this.name)
+        }
+    }
+
+    //Creating an object
+    var varma=new Person("Varma",46);
+    varma.showMyName();
+
+    // function Student(name,age,school){
+    //     this.name=name;
+    //     this.age=age;
+    //     this.school=school;
+    // }
+
+    // Student.prototype=new Person();
+
+    // Student.prototype.showMySchool=function(){
+    //     console.log(this.school)
+    // }
+
+    class Student extends Person{
+        constructor(name,age,school){
+            super(name,age);
+
+            this.school=school;
+        }
+
+        showMySchool(){
+            console.log(this.school)
+        }
+    }
+
+    var ram=new Student("Ram",34,"JNTU");
+
+    ram.showMySchool();
+    ram.showMyName();
+
+
+    var user={}
+
+    user.name="Varma";
+    user.age=46;
+
+    user.address={
+        street:"MIG 27/1",
+        city:"Hyderabad"
+    }
+
+    delete user.age;
+
+    var key="college name";
+    user[key]="JNTU";
+
+    if("age" in user){
+
+    }
+
+    var teacher=Object.assign({},user);
+
+
+    //localStorage
+
+    localStorage.setItem("userName","varmab");
+
+    //sessionStorage
+
+    var x=10;
+
+    if(true){
+        let x=20;
+        console.log(x); //20
+    }
+
+    console.log(x) //10
+
+    const PI=3.14;
+
+    const book={
+        title:"JavaScript Beginner",
+        author:"John"
+    }
+
+    book.author="Varma";
+    book.published="2020";
+
+    //You can't assign new object to  book
+    // book={
+    //     title:"Something else",
+    //     author:"Someone else"
+    // }
+
+    
+
+    var firstName="Varma";
+    var lastName="Bhupatiraju";
+    
+    var address="MIG 27/1 Road #6";
+    var area="KPHB";
+    var city="Hyderabad";
+    var postalCode="34343"
+    var state="TS"
+
+    var shippingLabel=firstName + " " + lastName + "\n" 
+    + address + "\n"
+    + area + ", " + city + "\n"
+    + state + ", " + postalCode;
+
+    console.log(shippingLabel)
+
+    var newShippingLabel=`
+        ${firstName} ${lastName}
+        ${address}
+        ${area}, ${city}
+        ${state} ${postalCode}
+        ${add(1,2)}
+    `
+
+    console.log(newShippingLabel)
+
+    //Rest operator
+    var add=function(...numbers){
+        return numbers.reduce(function(total,number){
+            return total+number;
+        })
+    }
+
+    var t=[1,2,3]
+    var v=[4,5,6]
+    var c=t.concat(v)
+    var d=[...t,...v]  //spread operator
+
+
+    var family=["Varma","Neelima","Suma","Father","Mother","Father-in-law","Mother-in-law"];
+
+    // var me=family[0];
+    // var wife=family[1];
+    // var daughter=family[2];
+
+    var [me, wife, daughter,...others]=family;
+
+    console.log(me, wife, daughter,others);
+
+    var family={
+        me:"Varma",
+        wife:"Neelima",
+        daughter:"Suma"
+    }
+
+    var {me,wife,daughter}=family;
+
+    var add=(a,b)=>{
+        return a+b;
+    }
+
+    function a(){
+        return new Promise(function(resolve,reject){
+            setTimeout(function(){
+                console.log("function a logged");
+                resolve("success")
+            },5000)
+        })
+    }
+
+    function b(){
+        console.log("function b logged");
+    }
+
+    a().then(b)
+    .catch((err)=>{
+
+    });
+
+    setTimeout(function(){
+        console.log("This will be displayed after 5 sec")
+    }, 5000)
+
+    var counter=0
+
+    // var id=setInterval(function(){
+    //             counter++
+    //             console.log("This will be displayed for every 1 sec " + counter )
+    //             $("span").text("This will be displayed for every 1 sec " + counter);
+    //         },1000);
+
+    // $("button").on("click",function(){
+    //     clearInterval(id);
+    // })
+
+    var pen={
+        color:"black",
+        type:"ballpoint"
+    }
+    console.log(JSON.stringify(pen));
+
+    var mydata="{\"color\":\"black\",\"type\":\"ballpoint\"}";
+    var newPen=JSON.parse(mydata);
+
+    //pencil="My pencil";
+
+    var person={ name:"Varma", age:42};
+
+function getProfile(){
+    return {
+        name: this.name,
+        age: this.age
+    }
+}
+
+getProfile(person); //Undefined values
+
+getProfile.call(person,true,45); //Correct
+getProfile.apply(person,[true,45]) //Correct
+
+
 </script>
